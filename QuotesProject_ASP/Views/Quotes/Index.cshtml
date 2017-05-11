@@ -1,0 +1,51 @@
+﻿@model IEnumerable<QuotesProject_ASP.Models.Quote>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@section OfDay{ 
+    @{ 
+        Random rnd = new Random();
+        if (Model.ToList().Count > 0)
+        {
+            var quote = Model.ToList()[rnd.Next(0, Model.ToList().Count)];
+
+            <p>Losowy cytat: @Html.ActionLink(quote.Content, "Details", "Quotes", new { id = quote.ID }, new { @class = "btn btn-info" })</p>
+        }
+    }
+}
+
+
+<h2>List of quotes</h2>
+
+<p>
+    @if (User.IsInRole("User") || User.IsInRole("Administrator"))
+    {
+        @Html.ActionLink("Create New", "Create", null ,new { @class = "btn btn-info" })
+    }
+</p>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">Filtres</h3>
+    </div>
+    <div class="panel-body">
+        @using (Html.BeginForm("Index", "Quotes", FormMethod.Get))
+        {
+            <p>
+                Author: @Html.TextBox("SearchString", null, new {  @input_type = "text", @class="form-control", @placeholder="Author's name"} ) <br />
+                Source: @Html.DropDownList("sourceString","All")
+                Category: @Html.DropDownList("searchCategory", "All")
+                <input type="submit" value="Filter" class="btn btn-info" />
+            </p>
+        }
+    </div>
+</div>
+
+
+
+@foreach (var item in Model)
+{
+    @Html.Partial("_QuoteManagePartial", item)
+}
+

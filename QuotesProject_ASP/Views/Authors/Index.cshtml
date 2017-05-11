@@ -1,0 +1,56 @@
+﻿@model IOrderedQueryable<IGrouping<string,QuotesProject_ASP.Models.Author>>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+@section OfDay{
+    @{
+        Random rnd = new Random();
+        if (Model.ToList().Count > 0)
+        {
+            var author = Model.SelectMany(x => x);
+
+             <p>Pierwszy autor: @Html.ActionLink(author.FirstOrDefault().FirstName + " " + author.FirstOrDefault().LastName, "Details", "Authors", new { id = author.FirstOrDefault().ID }, new { @class = "btn btn-info" })
+             </p>
+        }
+    }
+}
+
+<h2>Authors</h2>
+
+<p>
+    @if (User.IsInRole("User") || User.IsInRole("Administrator"))
+    {
+        @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-info" })
+    }
+</p>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">Filtres</h3>
+    </div>
+    <div class="panel-body">
+        @using (Html.BeginForm("Index", "Authors", FormMethod.Get))
+        {
+            <p>
+                Author's last name: @Html.TextBox("SearchString", null, new { @input_type = "text", @class = "form-control", @placeholder = "Author's name" }) <br />
+                <input type="submit" value="Filter" class="btn btn-info" />
+            </p>
+        }
+    </div>
+</div>
+
+<ul class="list-unstyled">
+    @foreach (var groupOfAuthors in Model)
+    {
+        @Html.Raw("Filter: " + groupOfAuthors.Key)
+        foreach (var item in groupOfAuthors)
+        {
+         <li> 
+             @Html.ActionLink(item.FirstName + " " + item.LastName, "Details", new { id = item.ID }, new { @class = "btn btn-default" })
+          </li>
+        }
+    }
+</ul>

@@ -1,0 +1,15 @@
+﻿@model QuotesProject_ASP.Models.Quote
+
+<div class="jumbotron">
+    <p><i>@Html.DisplayFor(modelItem => Model.Content)</i></p>
+    <p>@Html.DisplayFor(modelItem => Model.Author.FirstName) @Html.DisplayFor(modelItem => Model.Author.LastName)</p>
+    <div class="btn-group">
+        @Html.ActionLink("Details", "Details","Quotes", new { id = Model.ID }, new { @class = "btn btn-info" })
+        @if (User.IsInRole("Administrator"))
+        {
+            @Html.ActionLink("Edit ", "Edit","Quotes", new { id = Model.ID }, new { @class = "btn btn-info" })
+            @Html.ActionLink("Delete", "Delete","Quotes", new { id = Model.ID }, new { @class = "btn btn-info" })
+        }
+    </div>
+</div>
+

@@ -1,0 +1,23 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>Hello!</h1>
+    <p class="lead">Welcome to new page devoted to beautiful quotes and sentences. Feel free to register.</p>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <h2>Add new authors!</h2>
+        <p>
+            When you are logged in, you can add your favourite authors.
+        </p>
+        @Html.ActionLink("Authors", "Index","Authors", null, new { @class = "btn btn-info" })
+    </div>
+    <div class="col-md-6">
+        <h2>Add quotes!</h2>
+        <p> If you were looking for page, where you can store your favourite quotes, you don't have to search anymore.</p>
+        @Html.ActionLink("Quotes", "Index", "Quotes", null, new { @class = "btn btn-info" })
+    </div>
+</div>

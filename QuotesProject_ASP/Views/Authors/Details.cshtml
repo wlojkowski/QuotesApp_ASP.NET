@@ -1,0 +1,60 @@
+﻿@model QuotesProject_ASP.Models.Author
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div>
+    <div class="col-md-8">
+        <h2>List of quotes</h2>
+        @foreach (var item in Model.Quotes)
+        {
+            @Html.Partial("_QuoteManagePartial", item)
+        }
+
+    </div>
+    <div class="col-md-4">
+        <h4>Author</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.FirstName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.LastName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.LastName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Country)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Country)
+            </dd>
+            <dt>
+                Number of quotes
+            </dt>
+            <dd>
+                @Html.Raw(Model.Quotes.Count)
+            </dd>
+        </dl>
+        <p>
+            <div class="btn-group">
+                @Html.ActionLink("Delete", "Delete", new { id = Model.ID }, new { @class = "btn btn-info" })
+                @Html.ActionLink("Edit", "Edit", new { id = Model.ID }, new { @class = "btn btn-info" })
+                @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-info" })
+            </div>
+        </p>
+    </div>
+
+</div>
+

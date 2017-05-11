@@ -1,0 +1,50 @@
+﻿@model QuotesProject_ASP.Models.DetailsQuoteViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details of quote</h2>
+
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+           Author
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FullName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Content)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Content)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Source)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Source)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Category)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Category)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    <div class="btn-group">
+        @Html.ActionLink("Edit", "Edit", new { id = Model.ID }, new { @class= "btn btn-info" }) 
+        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-info" })
+    </div>
+</p>
